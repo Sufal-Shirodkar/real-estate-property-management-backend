@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# YAML config files
+*.yaml
+*.yml
+
+# OS-specific
+.DS_Store
