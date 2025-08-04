@@ -42,6 +42,7 @@ router.post('/login',userController.login)
 //property routes
 router.post('/property',propertyController.create) // validation for duplicates is pending 
 router.get('/property',propertyController.listAll)
+router.get('/property/:id',propertyController.getById)
 // router.put('/property',tokenAuthentication,propertyController.update)
 // router.delete('/property',tokenAuthentication,propertyController.delete)
 

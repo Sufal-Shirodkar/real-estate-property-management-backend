@@ -81,4 +81,22 @@ const PropertyModelRead = async () => {
         return { status: 500, message: "Internal Server Error", error: err };
     }
 }
-module.exports = { PropertyModelCreate, PropertyModelUploadPhotos, PropertyModelRead }
+
+const PropertyModelReadById = async (id) => {
+    const params = {
+        TableName: "Property",
+        Key: { id: id }
+    }
+    try{
+        const data = await dynamoDb.get(params).promise();
+        if(!data.Item){
+            return { status: 404, message: "Property not found" ,data:null};
+        }
+        return { status: 200, message: "Property retrieved successfully", data: data.Item };
+    }catch(err){
+        console.log(err);
+        return { status: 500, message: "Internal Server Error", error: err };
+    }
+}
+
+module.exports = { PropertyModelCreate, PropertyModelUploadPhotos, PropertyModelRead, PropertyModelReadById }

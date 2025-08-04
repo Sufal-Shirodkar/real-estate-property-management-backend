@@ -1,6 +1,6 @@
     require('dotenv').config();
 
-const { PropertyModelCreate, PropertyModelUploadPhotos, PropertyModelRead } = require("../models/propertyModel")
+const { PropertyModelCreate, PropertyModelUploadPhotos, PropertyModelRead, PropertyModelReadById } = require("../models/propertyModel")
 const PropertySchema = require("../schemas/propertySchema")
 
 const propertyController = {}
@@ -89,6 +89,27 @@ propertyController.listAll = async (req, res) => {
         const response = await PropertyModelRead()
         if(response.status === 200){
             res.status(200).send(response)
+        }else{
+            res.status(response.status).send(response.message)
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("Internal Server Error")
+    }
+}
+
+propertyController.getById = async (req, res) => {
+    try {
+        if(!req.params.id){
+            return res.status(400).json({
+                status: 400,
+                message: "Property ID is required",
+                data:null
+            })
+        }
+        const response = await PropertyModelReadById(req.params.id)
+        if(response.status === 200){
+            res.status(response.status).send(response)
         }else{
             res.status(response.status).send(response.message)
         }
