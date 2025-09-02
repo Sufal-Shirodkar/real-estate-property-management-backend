@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
-const PropertySchema = ({name, photos, description, price, location, propertyStatus})=>{
+const PropertySchema = ({name, photos, description, price, location, propertyStatus,position})=>{
     return {
         TableName: "Property",
         Item: {
@@ -10,7 +10,8 @@ const PropertySchema = ({name, photos, description, price, location, propertySta
             photos,
             price,
             location,
-            propertyStatus
+            propertyStatus,
+            position
         }
     }
 }
