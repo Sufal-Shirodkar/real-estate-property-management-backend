@@ -7,9 +7,8 @@ const propertyController = {}
 
 propertyController.create = async (req, res) => {
     try {
-        console.log(req.body)
-        // const parsedBody = JSON.parse((req.body).toString())
-        const { name,photos, description, price ,location, propertyStatus,position} = req.body
+        const parsedBody = JSON.parse((req.body).toString())
+        const { name,photos, description, price ,location, propertyStatus,position} = parsedBody
         const propertyContent = PropertySchema({ name,photos, description, price ,location, propertyStatus,position})
         const response = await PropertyModelCreate(propertyContent)
         if(response.status === 201){
