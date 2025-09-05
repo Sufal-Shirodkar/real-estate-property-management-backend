@@ -4,10 +4,10 @@ const { FeedbackItemSchema } = require('../schemas/feedbackSchema');
 
 feedBackController.create = async (req, res) => {
     try {
-       const  parsedBody = JSON.parse(req.body.toString());
-        const { name, email, rating, comment } = parsedBody;
+    //    const  parsedBody = JSON.parse(req.body.toString());
+        const { name, email, rating, comment,propertyId } = req.body;
 
-        const feedbackContent = FeedbackItemSchema({ name, email, rating, comment });
+        const feedbackContent = FeedbackItemSchema({ name, email, rating, comment,propertyId });
 
         const response = await FeedBackModelCreate(feedbackContent)
         if (response.status === 201) {

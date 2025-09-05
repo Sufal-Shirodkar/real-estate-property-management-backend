@@ -25,7 +25,9 @@ const tokenAuthentication = require("../controller/tokenAuthentication")
 const propertyController = require("../controller/propertyController")
 
 // feedback routes
-router.post('/feedback', validateBodySchema,tokenAuthentication ,feedBackController.create)
+router.post('/feedback', validateBodySchema,
+    // tokenAuthentication ,
+    feedBackController.create)
 router.get('/feedback/:tableName',tokenAuthentication, feedBackController.getAllRecords)
 router.put('/feedback', validateBodySchema, tokenAuthentication,feedBackController.updateRecord)
 router.delete('/feedback',tokenAuthentication,feedBackController.deleteRecord)

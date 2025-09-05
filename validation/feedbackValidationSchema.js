@@ -5,6 +5,7 @@ const feedbackValidationSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     rating: Joi.number().integer().min(1).max(5).required(),
+    propertyId: Joi.string().required(),
     comment: Joi.string().allow('').trim().optional() // Allow empty string or be optional
 });
 
