@@ -14,8 +14,11 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
     : {} // In Lambda, use IAM role
 );
 
-const PropertyModelCreate = async (propertyContent) => {
+const PropertyModelCreate = async (propertyContent,user) => {
     try {
+        if(user.role === "user"){
+          return { status: 401, message: "UnAuthorized", error: "UnAuthorized" };
+        }
         await dynamoDb.put(propertyContent).promise();
         return { status: 201, message: "Property Successfully Created", data: propertyContent.Item };
     } catch (err) {
@@ -75,7 +78,7 @@ const PropertyModelRead = async () => {
     }
     try {
         const data = await dynamoDb.scan(params).promise();
-        return { status: 200, message: "Property retrieved successfully", data: data.Items };
+        return { status: 200, message: "Property retrieved successfully", data: data.Items};
     } catch (err) {
         console.log(err);
         return { status: 500, message: "Internal Server Error", error: err };

@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
-const UserSchema = ({name, email, password})=> {
+const UserSchema = ({name, email, password,role})=> {
    return {
     TableName: 'User',
     Item: {
@@ -8,6 +8,7 @@ const UserSchema = ({name, email, password})=> {
         name,
         email,
         password,
+        role
     }
    }
 }

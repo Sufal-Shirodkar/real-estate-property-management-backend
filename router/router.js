@@ -26,7 +26,7 @@ const propertyController = require("../controller/propertyController")
 
 // feedback routes
 router.post('/feedback', validateBodySchema,
-    // tokenAuthentication ,
+    tokenAuthentication ,
     feedBackController.create)
 router.get('/feedback/:tableName',tokenAuthentication, feedBackController.getAllRecords)
 router.put('/feedback', validateBodySchema, tokenAuthentication,feedBackController.updateRecord)
@@ -42,9 +42,9 @@ router.post('/login',userController.login)
 // router.post('/resend-verification-email',userController.resendVerificationEmail)
 
 //property routes
-router.post('/property',propertyController.create) // validation for duplicates is pending 
-router.get('/property',propertyController.listAll)
-router.get('/property/:id',propertyController.getById)
+router.post('/property',tokenAuthentication,propertyController.create) // validation for duplicates is pending 
+router.get('/property',tokenAuthentication,propertyController.listAll)
+router.get('/property/:id',tokenAuthentication,propertyController.getById)
 // router.put('/property',tokenAuthentication,propertyController.update)
 // router.delete('/property',tokenAuthentication,propertyController.delete)
 

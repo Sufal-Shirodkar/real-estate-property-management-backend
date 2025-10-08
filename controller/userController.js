@@ -4,9 +4,10 @@ const userController ={}
 
 userController.signup = async (req, res) => {
     try {
+        // const { name, email, password,role} = req.body;
         const parsedBody = JSON.parse((req.body).toString());
-        const { name, email, password } = parsedBody;
-        const user = await UserModelCreate(name, email, password);
+        const { name, email, password, role} = parsedBody;
+        const user = await UserModelCreate(name, email, password,role);
         if(user.status === 201){
             res.status(201).send({...user.data,token:user.token})
         }else{
